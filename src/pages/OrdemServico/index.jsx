@@ -58,11 +58,29 @@ export default function OrdemServico() {
             dataAgendada: '27/05/2024',
             status: 'Agendado',
         },
+        {
+            id: 'os-1',
+            nomeCliente: 'Joao Silva',
+            produto: 'Notebook',
+            problema: 'Tela quebrada',
+            dataAgendada: '27/05/2024',
+            status: 'Agendado',
+        },
+        {
+            id: 'os-1',
+            nomeCliente: 'Joao Silva',
+            produto: 'Notebook',
+            problema: 'Tela quebrada',
+            dataAgendada: '27/05/2024',
+            status: 'Agendado',
+        },
     ];
 
     const clientes = [
         { id: 'cli-1', name: 'Joao Silva' },
         { id: 'cli-2', name: 'Maria Oliveira' },
+        { id: 'cli-3', name: 'Carlos Santos' },
+        { id: 'cli-4', name: 'Ana Costa' },
     ];
 
     const handleOpenModal = () => setIsModalOpen(true);

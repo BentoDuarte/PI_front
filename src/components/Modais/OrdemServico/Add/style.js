@@ -6,12 +6,13 @@ export const ModalOverlay = styled.div`
 	background: rgba(18, 20, 43, 0.45);
 	display: grid;
 	place-items: center;
-	padding: 24px;
+	padding: 15px;
 	z-index: 20;
 `;
 
 export const ModalCard = styled.div`
 	width: min(520px, 100%);
+	height: 85vh;
 	background: #ffffff;
 	border-radius: 18px;
 	box-shadow: 0 24px 60px rgba(18, 20, 43, 0.2);
@@ -68,7 +69,7 @@ export const TextInput = styled.input`
 export const TextArea = styled.textarea`
 	${baseInput}
 	resize: vertical;
-	min-height: 96px;
+	height: 30px;
 `;
 
 export const Select = styled.select`

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Card = styled.div`
   min-width: 150px;
-  height: 150px;
+  height: 120px;
   background: ${props => props.$cardBg || '#ffffff'};
   border-radius: 12px;
   padding: 12px 16px;

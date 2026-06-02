@@ -45,19 +45,12 @@ export default function OrdemServicoAddModal({
 		<ModalOverlay onClick={onClose} role="dialog" aria-modal="true">
 			<ModalCard onClick={event => event.stopPropagation()}>
 				<Header>
-					<Title>Nova Ordem de Servico</Title>
+					<Title>Nova Ordem de Serviço</Title>
 				</Header>
 				<Form onSubmit={handleSubmit}>
 					<Field>
 						<FieldLabel>Cliente</FieldLabel>
-						<Select name="clientId" value={form.clientId} onChange={handleChange}>
-							<option value="">Selecione um cliente</option>
-							{clients.map(client => (
-								<option key={client.id} value={client.id}>
-									{client.name}
-								</option>
-							))}
-						</Select>
+						<TextInput name="clientId" value={form.clientId} onChange={handleChange}/>
 					</Field>
 
 					<Field>
@@ -71,6 +64,16 @@ export default function OrdemServicoAddModal({
 					</Field>
 
 					<Field>
+						<FieldLabel>Data Agendada</FieldLabel>
+						<TextInput
+							name="scheduledDate"
+							type="date"
+							value={form.scheduledDate}
+							onChange={handleChange}
+						/>
+					</Field>
+
+					<Field>
 						<FieldLabel>Problema Relatado</FieldLabel>
 						<TextArea
 							name="issue"
@@ -78,16 +81,6 @@ export default function OrdemServicoAddModal({
 							value={form.issue}
 							onChange={handleChange}
 							placeholder="Descreva o problema"
-						/>
-					</Field>
-
-					<Field>
-						<FieldLabel>Data Agendada</FieldLabel>
-						<TextInput
-							name="scheduledDate"
-							type="date"
-							value={form.scheduledDate}
-							onChange={handleChange}
 						/>
 					</Field>
 

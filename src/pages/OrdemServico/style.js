@@ -7,13 +7,13 @@ export const Page = styled.div`
 
 export const Content = styled.main`
 	flex: 1;
-	padding: 32px;
+	padding: 0 32px 32px;
 	text-align: left;
 `;
 
 export const Title = styled.h1`
 	color: #2b2360;
-	margin-bottom: 16px;
+	margin: 0 0 16px;
 	font-weight: 600;
 `;
 
