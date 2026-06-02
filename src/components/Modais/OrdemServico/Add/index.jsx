@@ -15,32 +15,28 @@ import {
 	Title,
 } from './style';
 
-export default function OrdemServicoAddModal({
-	open,
-	onClose,
-	onSubmit,
-	clients = [],
-}) {
-	const [form, setForm] = useState({
+export default function CadastroOrdemServicoModal({isOpen, onClose }) {
+	const [ordemServico, seStOrdem] = useState({
 		clientId: '',
-		deviceType: '',
-		issue: '',
-		scheduledDate: '',
-		notes: '',
+		tipoAparelho: '',
+		problema: '',
+		dataAgendada: '',
+		observacoes: '',
 	});
 
-	if (!open) return null;
+
 
 	const handleChange = event => {
 		const { name, value } = event.target;
-		setForm(prev => ({ ...prev, [name]: value }));
+		setOrdem(prev => ({ ...prev, [name]: value }));
 	};
 
 	const handleSubmit = event => {
 		event.preventDefault();
-		onSubmit?.(form);
+		onSubmit?.(ordemServico);
 	};
 
+	if (!isOpen) return null;
 	return (
 		<ModalOverlay onClick={onClose} role="dialog" aria-modal="true">
 			<ModalCard onClick={event => event.stopPropagation()}>
@@ -50,14 +46,14 @@ export default function OrdemServicoAddModal({
 				<Form onSubmit={handleSubmit}>
 					<Field>
 						<FieldLabel>Cliente</FieldLabel>
-						<TextInput name="clientId" value={form.clientId} onChange={handleChange}/>
+						<TextInput name="clientId" value={ordemServico.clientId} onChange={handleChange}/>
 					</Field>
 
 					<Field>
 						<FieldLabel>Tipo de Dispositivo</FieldLabel>
 						<TextInput
-							name="deviceType"
-							value={form.deviceType}
+							name="tipoAparelho"
+							value={ordemServico.tipoAparelho}
 							onChange={handleChange}
 							placeholder="Ex: Notebook, Smartphone, Tablet..."
 						/>
@@ -66,9 +62,9 @@ export default function OrdemServicoAddModal({
 					<Field>
 						<FieldLabel>Data Agendada</FieldLabel>
 						<TextInput
-							name="scheduledDate"
+							name="dataAgendada"
 							type="date"
-							value={form.scheduledDate}
+							value={ordemServico.dataAgendada}
 							onChange={handleChange}
 						/>
 					</Field>
@@ -78,7 +74,7 @@ export default function OrdemServicoAddModal({
 						<TextArea
 							name="issue"
 							rows={4}
-							value={form.issue}
+							value={ordemServico.issue}
 							onChange={handleChange}
 							placeholder="Descreva o problema"
 						/>
@@ -87,9 +83,9 @@ export default function OrdemServicoAddModal({
 					<Field>
 						<FieldLabel>Observações (opcional)</FieldLabel>
 						<TextArea
-							name="notes"
+							name="observacoes"
 							rows={3}
-							value={form.notes}
+							value={ordemServico.observacoes}
 							onChange={handleChange}
 						/>
 					</Field>

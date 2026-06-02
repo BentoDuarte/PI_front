@@ -5,10 +5,23 @@ import { FiCalendar, FiClock, FiTool, FiCheckCircle } from 'react-icons/fi';
 import InfoCardGrid from '../../components/InfoCardGrid';
 import ServiceOrderCard from '../../components/ServiceOrderCard';
 import OrdemServicoInput from '../../components/Inputs/OrdemServico';
-import OrdemServicoAddModal from '../../components/Modais/OrdemServico/Add';
+import CadastroOrdemServicoModal from '../../components/Modais/OrdemServico/Add';
+import {listarOrdemServico} from "../../services/apiOrdemServico.js";
+import Alert from "../../utils/alert.js";
 
 export default function OrdemServico() {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [ordemServico, setOrdemServico] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+
+    const fetchOrdemServico = async () => {
+        try {
+            const response = await listarOrdemServico();
+            setOrdemServico(response.data);
+        } catch (error) {
+            console.error("Erro ao buscar ordens de serviço:", error);
+            Alert("Erro", "Erro ao buscar ordens de serviço"); 
+        }
+    };
 
     const cards = [
         {
@@ -59,19 +72,19 @@ export default function OrdemServico() {
             status: 'Agendado',
         },
         {
-            id: 'os-1',
-            nomeCliente: 'Joao Silva',
-            produto: 'Notebook',
-            problema: 'Tela quebrada',
-            dataAgendada: '27/05/2024',
+            id: 'os-2',
+            nomeCliente: 'Maria Oliveira',
+            produto: 'Smartphone',
+            problema: 'Tela trincada',
+            dataAgendada: '28/05/2024',
             status: 'Agendado',
         },
         {
-            id: 'os-1',
-            nomeCliente: 'Joao Silva',
-            produto: 'Notebook',
-            problema: 'Tela quebrada',
-            dataAgendada: '27/05/2024',
+            id: 'os-3',
+            nomeCliente: 'Carlos Santos',
+            produto: 'Tablet',
+            problema: 'Bateria com problema',
+            dataAgendada: '29/05/2024',
             status: 'Agendado',
         },
     ];
@@ -83,18 +96,14 @@ export default function OrdemServico() {
         { id: 'cli-4', name: 'Ana Costa' },
     ];
 
-    const handleOpenModal = () => setIsModalOpen(true);
-    const handleCloseModal = () => setIsModalOpen(false);
-    const handleSubmit = () => {
-        setIsModalOpen(false);
-    };
+    const onClose = () => setShowModal(false);
 
     return (
         <Page>
             <Content>
                 <div style={{display: "flex", flexDirection: "row", alignItems: "center", gap: "16px", justifyContent: "space-between"}}>
                     <Title>Ordem de Serviço</Title>
-                    <AddButton onClick={handleOpenModal}> <FaPlus /> Adicionar</AddButton>
+                    <AddButton onClick={() => setShowModal(true)}> <FaPlus /> Adicionar</AddButton>
                 </div>
                 <div>
                     <InfoCardGrid items={cards} />
@@ -112,11 +121,9 @@ export default function OrdemServico() {
                         />
                     ))}
                 </OrdersGrid>
-                    <OrdemServicoAddModal
-                        open={isModalOpen}
-                        onClose={handleCloseModal}
-                        onSubmit={handleSubmit}
-                        clientes={clientes}
+                    <CadastroOrdemServicoModal
+                        isOpen={showModal}
+                        onClose={onClose}
                     />
             </Content>
         </Page>

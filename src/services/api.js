@@ -1,6 +1,5 @@
 import axios from "axios";
-import Texts from "../assets/json/texts.json";
-import Alert from "../utils/alert";
+import Alert from "../utils/alert.js";
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_BACK_URL,
