@@ -45,3 +45,23 @@ export async function excluirOrdemServico(id) {
     console.error(errorMessage);
   }
 }
+
+export async function buscarHistoricoOrdemServico(id) {
+  try {
+    const response = await api.get(`/ordem-servico/${id}/historico`);
+    return response;
+  } catch (error) {
+    Alert("Erro", "Erro ao buscar historico da ordem de serviço");
+    console.error(error);
+  }
+}
+
+export async function buscarHistoricoGeralOrdemServico() {
+  try {
+    const response = await api.get("/ordem-servico/historico");
+    return response;
+  } catch (error) {
+    Alert("Erro", "Erro ao buscar historico geral");
+    console.error(error);
+  }
+}

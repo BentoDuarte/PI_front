@@ -9,26 +9,25 @@ import {
 	Header,
 	ModalCard,
 	ModalOverlay,
-	Select,
 	TextArea,
 	TextInput,
 	Title,
 } from './style';
 
-export default function CadastroOrdemServicoModal({isOpen, onClose }) {
-	const [ordemServico, seStOrdem] = useState({
-		clientId: '',
-		tipoAparelho: '',
-		problema: '',
-		dataAgendada: '',
-		observacoes: '',
+export default function CadastroOrdemServicoModal({ isOpen, onClose, onSubmit }) {
+	const [ordemServico, setOrdemServico] = useState({
+		tipoDispositivo: '',
+		descricao: '',
+		dataAbertura: '',
+		alunoResponsavel: '',
+		suporteResponsavel: '',
 	});
 
 
 
 	const handleChange = event => {
 		const { name, value } = event.target;
-		setOrdem(prev => ({ ...prev, [name]: value }));
+		setOrdemServico(prev => ({ ...prev, [name]: value }));
 	};
 
 	const handleSubmit = event => {
@@ -45,26 +44,31 @@ export default function CadastroOrdemServicoModal({isOpen, onClose }) {
 				</Header>
 				<Form onSubmit={handleSubmit}>
 					<Field>
-						<FieldLabel>Cliente</FieldLabel>
-						<TextInput name="clientId" value={ordemServico.clientId} onChange={handleChange}/>
+						<FieldLabel>Aluno Responsavel</FieldLabel>
+						<TextInput
+							name="alunoResponsavel"
+							value={ordemServico.alunoResponsavel}
+							onChange={handleChange}
+							placeholder="ID do aluno"
+						/>
 					</Field>
 
 					<Field>
 						<FieldLabel>Tipo de Dispositivo</FieldLabel>
 						<TextInput
-							name="tipoAparelho"
-							value={ordemServico.tipoAparelho}
+							name="tipoDispositivo"
+							value={ordemServico.tipoDispositivo}
 							onChange={handleChange}
 							placeholder="Ex: Notebook, Smartphone, Tablet..."
 						/>
 					</Field>
 
 					<Field>
-						<FieldLabel>Data Agendada</FieldLabel>
+						<FieldLabel>Data de Abertura</FieldLabel>
 						<TextInput
-							name="dataAgendada"
+							name="dataAbertura"
 							type="date"
-							value={ordemServico.dataAgendada}
+							value={ordemServico.dataAbertura}
 							onChange={handleChange}
 						/>
 					</Field>
@@ -72,21 +76,21 @@ export default function CadastroOrdemServicoModal({isOpen, onClose }) {
 					<Field>
 						<FieldLabel>Problema Relatado</FieldLabel>
 						<TextArea
-							name="issue"
+							name="descricao"
 							rows={4}
-							value={ordemServico.issue}
+							value={ordemServico.descricao}
 							onChange={handleChange}
 							placeholder="Descreva o problema"
 						/>
 					</Field>
 
 					<Field>
-						<FieldLabel>Observações (opcional)</FieldLabel>
-						<TextArea
-							name="observacoes"
-							rows={3}
-							value={ordemServico.observacoes}
+						<FieldLabel>Suporte Responsavel</FieldLabel>
+						<TextInput
+							name="suporteResponsavel"
+							value={ordemServico.suporteResponsavel}
 							onChange={handleChange}
+							placeholder="ID do suporte"
 						/>
 					</Field>
 
