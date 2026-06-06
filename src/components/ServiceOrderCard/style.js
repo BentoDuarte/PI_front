@@ -1,10 +1,40 @@
 import styled from 'styled-components';
 
+const statusPalette = {
+  ABERTO: {
+    border: '#3b82f6',
+    soft: '#eaf1ff',
+    text: '#1d4ed8',
+    shadow: 'rgba(59, 130, 246, 0.18)',
+  },
+  EXECUTANDO: {
+    border: '#f59e0b',
+    soft: '#fff7e6',
+    text: '#b45309',
+    shadow: 'rgba(245, 158, 11, 0.18)',
+  },
+  CONCLUIDO: {
+    border: '#22c55e',
+    soft: '#eafaf0',
+    text: '#15803d',
+    shadow: 'rgba(34, 197, 94, 0.18)',
+  },
+  CANCELADO: {
+    border: '#ef4444',
+    soft: '#fdecec',
+    text: '#b91c1c',
+    shadow: 'rgba(239, 68, 68, 0.18)',
+  },
+};
+
+const getStatusPalette = (status) => statusPalette[status] ?? statusPalette.ABERTO;
+
 export const Card = styled.div`
   background: #ffffff;
   border-radius: 14px;
   padding: 18px 20px;
-  box-shadow: 0 8px 20px rgba(18, 20, 43, 0.08);
+  border: 2px solid ${({ $status }) => getStatusPalette($status).border};
+  box-shadow: 0 8px 20px ${({ $status }) => getStatusPalette($status).shadow};
   display: grid;
   gap: 12px;
 `;
@@ -87,7 +117,7 @@ export const StatusWrapper = styled.div`
   svg {
     position: absolute;
     right: 12px;
-    color: #5a4be7;
+    color: ${({ $status }) => getStatusPalette($status).text};
     pointer-events: none;
   }
 `;
@@ -96,8 +126,8 @@ export const StatusSelect = styled.select`
   margin-left: auto;
   appearance: none;
   border: none;
-  background: #eaf1ff;
-  color: #1d4ed8;
+  background: ${({ $status }) => getStatusPalette($status).soft};
+  color: ${({ $status }) => getStatusPalette($status).text};
   font-weight: 600;
   padding: 6px 32px 6px 14px;
   border-radius: 999px;

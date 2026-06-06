@@ -26,7 +26,7 @@ export default function ServiceOrderCard({
   onHistory,
 }) {
   return (
-    <Card>
+    <Card $status={status}>
       <Header>
         <div>
           <Title>{alunoResponsavel}</Title>
@@ -55,9 +55,10 @@ export default function ServiceOrderCard({
         <Value>{dataAbertura}</Value>
       </InfoBlock>
 
-      <StatusWrapper>
+      <StatusWrapper $status={status}>
         <Label>Status</Label>
         <StatusSelect
+          $status={status}
           value={status}
           onChange={(event) => onStatusChange?.(event.target.value)}
         >

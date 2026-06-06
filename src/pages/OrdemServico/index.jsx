@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Title, AddButton, Page, Content, OrdersGrid } from './style';
 import { FaPlus } from "react-icons/fa";
-import { FiCalendar, FiClock, FiTool, FiCheckCircle } from 'react-icons/fi';
+import { FiCalendar, FiClock, FiTool, FiCheckCircle, FiXCircle } from 'react-icons/fi';
 import InfoCardGrid from '../../components/InfoCardGrid';
 import ServiceOrderCard from '../../components/ServiceOrderCard';
 import OrdemServicoInput from '../../components/Inputs/OrdemServico';
@@ -187,9 +187,10 @@ export default function OrdemServico() {
             if (item.status === 'ABERTO') acc.aberto += 1;
             if (item.status === 'EXECUTANDO') acc.executando += 1;
             if (item.status === 'CONCLUIDO') acc.concluido += 1;
+            if (item.status === 'CANCELADO') acc.cancelado += 1;
             return acc;
         },
-        { total: 0, aberto: 0, executando: 0, concluido: 0 },
+        { total: 0, aberto: 0, executando: 0, concluido: 0, cancelado: 0 },
     );
 
     const cards = [
@@ -213,7 +214,7 @@ export default function OrdemServico() {
         },
         {
             id: 'progress',
-            title: 'Em Andamento',
+            title: 'Executando',
             value: totals.executando,
             icon: FiTool,
             iconColor: '#f59e0b',
@@ -227,6 +228,15 @@ export default function OrdemServico() {
             icon: FiCheckCircle,
             iconColor: '#16a34a',
             iconBg: '#e8f9ef',
+            iconBorderColor: '#c7f0d8',
+        },
+        {
+            id: 'cancel',
+            title: 'Cancelados',
+            value: totals.cancelado,
+            icon: FiXCircle,
+            iconColor: '#dc2626',
+            iconBg: '#fee2e2',
             iconBorderColor: '#c7f0d8',
         },
     ];
